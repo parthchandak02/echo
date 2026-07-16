@@ -1,32 +1,22 @@
-# React + TypeScript + Vite
+# echo
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Your voice and ambient sound become a living 3D sculpture. Frequency bands drive glowing neon bars, particle rings pulse to the beat, and the entire scene breathes with your audio.
 
-Currently, two official plugins are available:
+**Visual Style:** Bold — Synthwave (retro neon with deep purple background, magenta/cyan/orange glow, scanlines)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Data Source:** Microphone input via Web Audio API (getUserMedia + AnalyserNode). Falls back to oscillator-generated synthetic tones if mic permission is denied.
 
-## React Compiler
+**How it works:**
+- Tap the mic button to start listening — audio data from your microphone drives 128 3D frequency bars in real time
+- Frequency amplitude controls bar height — louder = taller
+- Frequency range is color-coded: magenta (bass), cyan (mid), orange (high)
+- A particle ring pulses with overall RMS amplitude
+- OrbitControls let you rotate around the 3D sound sculpture
+- Tap any frequency bar to see its exact Hz value and amplitude in the Quiet Zone panel
+- Hero number shows peak frequency and RMS amplitude
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**GitHub:** https://github.com/parthchandak02/echo
 
-## Expanding the Oxlint configuration
+**Live:** https://echo.parthchandak.info
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+**Tech:** React Three Fiber + drei + Web Audio API. Hosted on Cloudflare Pages.
