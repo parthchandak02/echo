@@ -94,8 +94,9 @@ async function initAudio(): Promise<void> {
 
     const source = ctx.createMediaStreamSource(mediaStream)
     const analysis = setupAnalyser(ctx)
+    // Analyse only: routing the mic to ctx.destination would play it back through the
+    // speakers and feed back into the mic.
     source.connect(analysis)
-    analysis.connect(ctx.destination)
   } catch {
     setupSyntheticFallback(ctx)
   }
@@ -133,7 +134,7 @@ export function getPeakFrequency(binIndex: number, sampleRate = audioContext?.sa
 }
 
 export function binIndexToHz(binIndex: number): number {
-  return binIndex * (44100 / 512)
+  return getPeakFrequency(binIndex)
 }
 
 export async function startListening(): Promise<void> {
